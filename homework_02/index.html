@@ -22,9 +22,22 @@
                 A function passed to process.nextTick() is going to be executed on the current 
                 iteration of the event loop, after the current operation ends. 
                 This means it will always execute before setTimeout and setImmediate.
+
+                setImmediate will locate on check queue of event loop and will execute immediately when 
+                first iteration of the event loop.
         </pre>
         <pre>3. Name 10 core modules that Node provides by default?</pre> 
         <pre>
+            1. v8: v8 module exposes APIs that are specific to the version of V8 built into the Node.js binary.
+            2. url: url module includes methods for URL resolution and parsing. 
+            3. http : http module includes classes, methods and events to create Node.js http server. 
+            4. querystring : querystring module includes methods to deal with query string. 
+            5. path : path module includes methods to deal with file paths. 
+            6. fs : fs module includes classes, methods, and events to work with file I/O.
+            7. util : util module includes utility functions useful for programmers.
+            8. vm : The vm module provides APIs for compiling and running code within V8 Virtual Machine contexts.
+            9. timer : The timer module exposes a global API for scheduling functions to be called at some future period of time.
+            10. os : The os module provides a number of operating system-related utility methods.             
 
         </pre>       
     </Body>
