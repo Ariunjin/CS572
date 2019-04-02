@@ -64,15 +64,6 @@
       const day = todayDate.getDay();
       numbers = ["weekend","weekday","weekday","weekday","weekday","weekday","weekend"];
       console.log(numbers[day]);
-     /* const {from} = rxjs;
-      const {map, filter} = rxjs.operators;
-      const data = [{"0":"weekend"},{"1":"weekday"},{"2":"weekday"},{"3":"weekday"},{"4":"weekday"},{"5":"weekday"},{"6":"weekend"}];
-      from(data)
-      .pipe(
-        filter(obj => obj)
-      ).subscribe(
-        obj => console.log(obj[day])
-      );*/
    }
    isWeekend();
 
@@ -83,18 +74,19 @@
     "category" : "Food",
     "price" : 200
   }
-/*  const applyCoupon = item => disc => {
-    item.price = item.price - (item.price * disc / 100);
-    return item;
-  };
-  console.log(applyCoupon(item)(10).price === 180);
-*/
-  const applyCoupon1 = function(item){
+  /*
+  const applyCoupon = function(item){
     return function(disc){
       item.price = item.price - (item.price * disc / 100);
       return item;
     }
   }   
-  console.log(applyCoupon1(item)(10).price === 180);
+  console.log(applyCoupon(item)(10).price === 180);
+  */
+  const applyCoupon = item => disc => {
+    item.price = item.price - (item.price * disc / 100);
+    return item;
+  };
+  console.log(applyCoupon(item)(10).price === 180);
 
 }

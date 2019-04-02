@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://unpkg.com/rxjs@6.4.0/bundles/rxjs.umd.min.js"></script>
+        <script src="execise.js"></script>
+    </head>
+    <Body>
+        <h1>CS572 Homework 2</h1>
+        <pre>1. Explain why do we want sometimes to use <c>setImmediate</c> instead 
+            of using <c>setTimeout</c>?</pre>
+        <pre>
+                When you want to execute some piece of code asynchronously, 
+                but as soon as possible, one option is to use the setImmediate() function.
+
+                A setTimeout() callback with a 0ms delay is very similar to setImmediate(). 
+                The execution order will depend on various factors, 
+                but they will be both run in the next iteration of the event loop.
+        </pre>   
+        <pre>2. Explain the difference between <c>process.nextTick</c> and 
+            <c>setImmediate</c>?</pre>
+        <pre>
+                A function passed to process.nextTick() is going to be executed on the current 
+                iteration of the event loop, after the current operation ends. 
+                This means it will always execute before setTimeout and setImmediate.
+        </pre>
+        <pre>3. Name 10 core modules that Node provides by default?</pre> 
+        <pre>
+
+        </pre>       
+    </Body>
+</html>
