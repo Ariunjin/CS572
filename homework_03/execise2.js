@@ -1,16 +1,16 @@
 var EventEmitter = require('events');
 
-class ComproStudent extends EventEmitter {
+class Gym extends EventEmitter {
     constructor() {
         super();
-        this.message = 'New Student!';
+        this.message = 'Gym class!';
     }
-    visit() {
+    callBoom(txt) {
         console.log(this.message);
-        this.emit('newStudent',' Ari');
+        this.emit('boom',txt);       
     } 
 }
+var myGym = new Gym();
+myGym.on('boom',function(txt){ console.log(`${txt}`); });
+setInterval(() => {myGym.callBoom("Athelete is working out!");}, 1000);
 
-var student = new ComproStudent();
-student.on('newStudent',function(name){console.log(`Hello, ${name}`)});
-student.visit();
