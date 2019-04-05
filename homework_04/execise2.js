@@ -1,19 +1,26 @@
-let http = require('http');
-let fs = require('fs');
-let path = require('path');
-let url = require('url');
+const http = require('http');
+const url = require('url');
+const path = require('path');
+const { fork } = require('child_process');
 
 const server = http.createServer();
 
-server.on('request', (req, res) => {
-  const urlObj = url.parse(req.url);
-  //const path = urlObj.query.path;
-  console.log(urlObj);
-  fs.readFile(path.join(__dirname,'./file.txt'), (err, data) => {
-    if (err) throw err; 
-    res.end(data);
-  });
-});
+// http://localhost:4000/?url=/file.txt 
+server.on("request", (req, res) => {
+    const urlObj = url.parse(req.url, true);
+    if (urlObj.query.url) {
+        const childProcess = fork('filesent.js');
+        childProcess.send(path.join(__dirname, urlObj.query.url));
+        childProcess.on('message', (message) => {
+            if (message == null) {
+                res.end();
+            } else if (message) {
+                res.write(message.toString());
+            }
+        });
+    }
+})
 
-server.listen(4000,()=>console.log('Listening on 4000'));
-//
+server.listen(4000, () => {
+    console.log('Server listening on 4000:');
+});
