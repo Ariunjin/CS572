@@ -12,5 +12,6 @@ class Gym extends EventEmitter {
 }
 var myGym = new Gym();
 myGym.on('boom',function(txt){ console.log(`${txt}`); });
+
 setInterval(() => {myGym.callBoom("Athelete is working out!");}, 1000);
 
