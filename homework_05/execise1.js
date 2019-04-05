@@ -1,11 +1,12 @@
 //dependencies
 const express = require('express');
-//const fetch = require('node-fetch');
 const axios = require('axios');
 let app = express();
+
 // setup
 app.set('case sensitive routing',true);
 app.set('strict routing',true);
+app.set('case sensitive routing',true);
 app.set('trust proxy',true);
 
 app.get('/users', function(req,res){
@@ -32,4 +33,4 @@ app.get('/users', function(req,res){
     getData();
 });
 // initialize
-app.listen(4000,()=>console.log('Listening 4000'));
+app.listen(4000,()=>console.log('Listening on 4000'));
