@@ -44,10 +44,44 @@ app.post('/grade',function(req,res){
 });
 
 app.delete('/grade/:id', function(req,res){
-    console.log(req.params.id);    
-    grades.splice(req.params.id-1,1);
-    res.send(grades);
+    console.log(req.params.id); 
+    let index = -1;         
+    for(i = 0; i < grades.length; i++){
+        if (grades[i].id === req.params.id) index = i;
+    }    
+    if (index > -1) {
+        grades.splice(index,1);    
+        res.send(grades);
+    }
     res.end();
+});
+
+app.put('/grade', function(req,res){    
+    let index = -1;         
+    for(i = 0; i < grades.length; i++){
+        if (grades[i].id === req.params.id) index = i;
+    }    
+    if (index > -1) {
+        grades.splice(index,1);    
+        res.send(grades);
+    }
+    res.end();
+});
+
+app.put('/grade',function(req,res){
+    let index = -1;         
+    for(i = 0; i < grades.length; i++){
+        if (grades[i].id === req.params.id) index = i;
+    }  
+    if (index == -1) {
+        grades.push(req.body);    
+        res.send(grades);
+        res.end();
+    } else {
+        grades[index] = req.body;
+        res.send(grades);
+        res.end();
+    }
 });
 //boot-up
 app.listen(3000,()=>console.log('Listening on 3000'));
