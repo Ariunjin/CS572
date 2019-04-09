@@ -1,26 +1,31 @@
-POST http://localhost:3000/grade HTTP/1.1
+GET http://localhost:4000/secret HTTP/1.1
+
+####
+GET http://localhost:5000/lectures HTTP/1.1
+
+####
+GET http://localhost:5000/lectures/CS572 HTTP/1.1
+
+####
+POST http://localhost:5000/lectures HTTP/1.1
 content-type: application/json
 
 {
-    "id": "4",
-    "name": "Alaa",
-    "course": "CS572",
-    "grade": "100"
+    "course": "WAP",
+    "lecture": "03"
 }
 
 ####
-GET http://localhost:3000/grade HTTP/1.1
+DELETE http://localhost:5000/lectures/WAP HTTP/1.1
 
 ####
-GET http://localhost:3000/grade/1 HTTP/1.1
-
-####
-DELETE http://localhost:3000/grade/1 HTTP/1.1
-
-####
-GET http://localhost:4000/secret HTTP/1.1
+PUT  http://localhost:5000/lectures/WAP HTTP/1.1
 content-type: application/json
 
+{
+    "course": "WAP",
+    "lecture": "01"
+}
+
 ####
-GET http://localhost:3000/lectures HTTP/1.1
-content-type: application/json
+GET http://localhost:5000/search/03 HTTP/1.1

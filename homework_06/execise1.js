@@ -21,10 +21,6 @@ app.set('trust proxy',true);
 app.use(morgan('combined',accessLogStream));
 app.use(bodyParser.json());
 app.use(cors());
-let validate = (req,res) => {
-    req.body
-}
-
 //routing
 app.get('/grade', function(req,res,next){
     console.log('get request');

@@ -1,6 +1,4 @@
 let express=require('express');
-let request = require("request");
-const bodyParser = require('body-parser');
 var fs = require('fs')
 var morgan = require('morgan')
 var path = require('path')
@@ -15,70 +13,77 @@ app.use(cors());
 var urlencodedParser = express.urlencoded({extended: true});
 app.use(urlencodedParser);
 
-
 const MongoClient = require('mongodb').MongoClient;
-const client=new MongoClient('mongodb://localhost:27017', { useNewUrlParser: true });    
+const uri = "mongodb+srv://user01:987654321@cluster0-gougl.mongodb.net/test?retryWrites=true";
+const client = new MongoClient(uri, { useNewUrlParser: true });
+
 let db;
 let collection;
-client.connect(function(err){
-     db=client.db('homework07');
-     collection=db.collection('lectures');      
-    }); 
-   
+client.connect(err => {
+  if (err) throw err;
+  db = client.db('homework07');
+  collection = db.collection('lectures'); 
+  //client.close();
+});
 
-//Get
-app.get('/lectures',function(req,res){
-    let data=[];
-    collection.find({}).forEach(function(doc) {
-       // console.log(Object.prototype.toString.call(doc));
-       console.log(doc);
-      // data.push(doc);
-      }); 
- res.send(data);
- res.end(); 
-}
-);
+// get ALL
+app.get('/lectures', function(req,res){   
+    collection.find({},{_id:0}).toArray().then(result =>  {
+        res.json(result);
+        res.end();})
+        .catch(err => console.log(err)); 
+});
 
-app.get('/lectures/:course',function(req,res){   
-    const cou=req.params.course; 
-   collection.find({course:cou}).forEach(function(doc) {   
-   console.log(doc);  
-  }); 
-}
-);
+// get One by course name
+app.get('/lectures/:course', function(req,res){   
+  collection.find({course:req.params.course},{_id:0}).toArray((err,arr) =>  {
+      res.json(arr);
+      res.end();
+  });     
+});
 
-
+// post
 app.post('/lectures',function(req,res){ 
-    collection.save(req.body);
-    console.log(req.body);
-}
-);
+  collection.insertOne(req.body);
+  collection.find().toArray((err,arr) =>  {
+    if (err) throw err;
+    res.json(arr);
+    res.end();
+  });  
+});
 
-// Put
-app.put('/lectures/:course',function(req,res){  
-    
-    const myquery={course:req.params.course};
-    var newvalues = { $set: req.body };
+// delete
+app.delete('/lectures/:course',function(req,res){ 
+  collection.deleteOne(req.body);
+  collection.find().toArray((err,arr) =>  {
+    if (err) throw err;
+    res.json(arr);
+    res.end();
+  });  
+});
 
-    collection.updateOne(myquery, newvalues, function(err, res) {
-        if (err) throw err;
+// put
+app.put('/lectures/:course',function(req,res){ 
+  const myquery={course:req.params.course};
+  var newvalues = { $set: req.body };
+  collection.updateOne(myquery, newvalues, function(err, result) {
+      if (err) throw err;
+      console.log("UpdateOne:");        
+    });   
+  collection.find().toArray((err,arr) =>  {
+    res.json(arr);
+    res.end();
+  });  
+});
 
-        console.log("UpdateOne:");
-        console.log(req.body);
-       
-      });
-}
-);
+app.get('/search/:q',function(req,res){  
+  const patt = req.params.q; 
+  collection.find({lecture:{$regex:patt}}).toArray((err,arr) =>  {
+    if (err) throw err;
+    res.json(arr);
+    res.end();
+  });  
+});
 
-// Delete
-app.delete('/lectures/:course',function(req,res){  
-    const myquery={course:req.params.course};
-    collection.deleteOne(myquery, function(err, obj) {
-        if (err) throw err;
-        console.log("deleteOne:");
-        console.log(req.body);
-       });
-}
-);
-
-app.listen(3000,()=>console.log("Listening to 3000"));
+//boot-up
+app.listen(5000,()=>console.log('Listening on 5000'));
