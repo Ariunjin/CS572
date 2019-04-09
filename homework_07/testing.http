@@ -8,9 +8,19 @@ content-type: application/json
     "grade": "100"
 }
 
+####
+GET http://localhost:3000/grade HTTP/1.1
 
-//GET http://localhost:3000/grade HTTP/1.1
+####
+GET http://localhost:3000/grade/1 HTTP/1.1
 
-//GET http://localhost:3000/grade/1 HTTP/1.1
+####
+DELETE http://localhost:3000/grade/1 HTTP/1.1
 
-//DELETE http://localhost:3000/grade/1 HTTP/1.1
+####
+GET http://localhost:4000/secret HTTP/1.1
+content-type: application/json
+
+####
+GET http://localhost:3000/lectures HTTP/1.1
+content-type: application/json
