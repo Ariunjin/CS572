@@ -1,8 +1,19 @@
 ####
 GET http://localhost:5000/locations HTTP/1.1
+####
+POST http://localhost:5000/MUM HTTP/1.1
+
+    {
+        "name": "MUM",
+        "category":"University",
+        "location": [
+          -91.9665342,
+            41.017654
+        ]    
+    }
 
 ####
-POST http://localhost:5000/locations HTTP/1.1
+POST http://localhost:5000/insert HTTP/1.1
 content-type: application/json
 
 [
@@ -28,6 +39,14 @@ content-type: application/json
             "lat": 41.0169001,
             "long": -91.9586948
         }    
+    },
+    {
+    "name":"Hyvee",
+    "category":"Rest",
+    "location":[
+        -91.9684817,
+        41.011239        
+        ]
     }
 ]
 
