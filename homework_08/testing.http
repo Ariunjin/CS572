@@ -1,7 +1,10 @@
 ####
 GET http://localhost:5000/locations HTTP/1.1
+
 ####
-POST http://localhost:5000/MUM HTTP/1.1
+GET http://localhost:5000/near HTTP/1.1
+####
+POST http://localhost:5000/locations HTTP/1.1
 
     {
         "name": "MUM",
@@ -13,7 +16,7 @@ POST http://localhost:5000/MUM HTTP/1.1
     }
 
 ####
-POST http://localhost:5000/insert HTTP/1.1
+POST http://localhost:5000/locations HTTP/1.1
 content-type: application/json
 
 [

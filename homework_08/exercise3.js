@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: true}));
+//app.use('/api',require('./routes.js'));
 
 const MongoClient = require('mongodb').MongoClient;
 const client=new MongoClient('mongodb://localhost:27017', { useNewUrlParser: true });  
@@ -52,7 +53,7 @@ client.connect(err => {
 //    console.dir(`Success ${docInserted}`);
 //   });
 });
-app.use('/api',require('./routes.js'))
+
 
 // get all locations
 app.get('/locations', function(req,res){   
@@ -73,6 +74,13 @@ app.post('/locations', (req,res) => {
 .catch(err => console.log(err)); 
 });
 
-
+app.get('/near', (req,res) => {     
+  coll.find({location: {$near: [-91.9612747,41.0132949]}}).limit(2)
+  .toArray().then(result =>  {
+    res.json(result);
+    res.end();
+  })
+  .catch(err => console.log(err)); 
+});
 //boot-up
 app.listen(5000,()=>console.log('Listening on 5000'));
