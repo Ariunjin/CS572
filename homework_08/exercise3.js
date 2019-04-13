@@ -2,6 +2,8 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const json = express.json();
+app.use(json);
 app.use(bodyParser.urlencoded({extended: true}));
 //app.use('/api',require('./routes.js'));
 
@@ -48,10 +50,6 @@ client.connect(err => {
   db = client.db('CS572');
   coll = db.collection('locations'); 
   coll.createIndex({"location":'2d'});
-  //coll.deleteMany({name: {$regex: /!MUM/}});
-//   coll.insertMany(data, function(err,docInserted){
-//    console.dir(`Success ${docInserted}`);
-//   });
 });
 
 
@@ -65,17 +63,20 @@ app.get('/locations', function(req,res){
 });
 
 // post
-app.post('/locations', (req,res) => {     
-  coll.insertOne(req.body); 
-  coll.find().toArray().then(result =>  {
-    res.json(result);
-    res.end();
-})
-.catch(err => console.log(err)); 
+app.post('/locations', (req,res) => {  
+    coll.insertOne(req.body, function(err,doc){
+      if(err) console.log(err);
+      console.log(doc);
+    }); 
+    coll.find().toArray().then(result =>  {
+      res.json(result);
+      res.end();
+  })
+  .catch(err => console.log(err)); 
 });
 
 app.get('/near', (req,res) => {     
-  coll.find({location: {$near: [-91.9612747,41.0132949]}}).limit(2)
+  coll.find({location: {$near: [-91.9612747,41.0132949]}}).limit(3)
   .toArray().then(result =>  {
     res.json(result);
     res.end();

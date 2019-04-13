@@ -5,53 +5,48 @@ GET http://localhost:5000/locations HTTP/1.1
 GET http://localhost:5000/near HTTP/1.1
 ####
 POST http://localhost:5000/locations HTTP/1.1
+content-type: application/json
 
-    {
-        "name": "MUM",
-        "category":"University",
-        "location": [
-          -91.9665342,
-            41.017654
-        ]    
-    }
-
+{
+    "name": "Ulaanbaatar, Mongolia",
+    "category":"Country",
+    "location": [106.7617863,47.8917951]    
+}
 ####
 POST http://localhost:5000/locations HTTP/1.1
 content-type: application/json
 
+###
+POST http://localhost:5000/locations HTTP/1.1
+content-type: application/json
+
 [
-    {
-        "name": "Everybody's Whole Foods",
-        "category":"Natural goods store",
-        "location": [
-            41.0103777,
-            -91.9684491
-        ]   
-    },
-    {
-        "name": "Carnegie Historical Museum",
-        "category":"History Museum",
-        "location": [
-            41.0129365,
-            -91.9591732
-        ]   
-    },    {
-        "name": "Golden Dome Market and Cafe",
-        "category":"Health food store",
-        "location": {
-            "lat": 41.0169001,
-            "long": -91.9586948
-        }    
-    },
-    {
+  {    
+    "name": "WaleMart",
+    "category": "Market",
+    "location": [-91.993186,41.008382]
+  },
+  {
+    "name": "MUM",
+    "category": "University",
+    "location": [-91.967291,41.018059]
+  },
+  {
+    "name": "Des Monnes",
+    "category": "City",
+    "location": [-93.6765561,41.5667771]
+  },    
+  {
     "name":"Hyvee",
     "category":"Rest",
     "location":[
         -91.9684817,
         41.011239        
         ]
-    }
+ }
 ]
+
+
 
 ####
 GET http://localhost:3000/query1 HTTP/1.1
