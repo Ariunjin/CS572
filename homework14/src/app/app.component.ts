@@ -19,7 +19,6 @@ export class AppComponent {
     console.log('getting data');
     this.dataService.getOnlineData()
     .subscribe((data) => {
-      //console.log(data)
       localStorage.setItem('users',JSON.stringify(data['results']));
     });
   }

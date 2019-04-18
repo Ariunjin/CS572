@@ -5,14 +5,12 @@ import { MyServiceService } from '../my-service.service';
     selector: `app-users`,
     template: `
         <div *ngFor="let user of users">Id: {{user.id.value}},Name: {{user.name.first}},Email: {{user.email}},</div>            
-        <app-userdetails><\app-userdetails>   
-        
-    `,
+        `,
     styles: [``]
 })
 export class UsersComponent{
     title = 'Users component';
-    users;
+    users:any;
     constructor(private dataService: MyServiceService){ 
         
     }
