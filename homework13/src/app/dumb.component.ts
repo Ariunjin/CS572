@@ -11,8 +11,7 @@ import { Component, Input, ChangeDetectionStrategy, OnChanges } from '@angular/c
       <div appIsVisible [hidden]="isVisible">Is visible directive</div>      
       <div appMakeBigger>Mouse leave is making this text bigger and bigger</div>
     </ul>
-  `,
-  styleUrls: ['./dumb.component.css'],
+  `, 
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DumbComponent implements OnChanges {

@@ -7,8 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
     <div>Item: <input [value] = "newItem" (input)="newItem=$event.target.value"></div>
     <button (click)="addItem()">Add Item</button>
     <app-dumb [items]="items"></app-dumb>    
-  `,
-  styleUrls: ['./smart.component.css']
+  `
 })
 export class SmartComponent implements OnInit {
   public items = [{"id":1,name:"phone"},{"id":2,name:"tablet"},{"id":3,name:"computer"}];
