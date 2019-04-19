@@ -12,6 +12,6 @@ import { MyServiceService as Guard }  from '../my-service.service';
     {path:'users/:uuid', component: UserdetailsComponent, canActivate: [Guard]}
   ])] ,
   providers: [],
-  bootstrap: [UsersComponent]
+  bootstrap: []
 })
 export class UsersModule { }
